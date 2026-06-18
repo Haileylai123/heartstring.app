@@ -3,161 +3,388 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Privacy Policy — Heartstring</title>
-  <meta name="description" content="How Heartstring handles your data. Local-first, no tracking, no selling." />
+  <title>Heartstring — say what you mean</title>
+  <meta name="description" content="An app for people who passed IELTS but freeze when someone asks 'how are you, really?'" />
+  <meta property="og:title" content="Heartstring — say what you mean" />
+  <meta property="og:description" content="A place to practice saying the things you actually want to say in English. Built by one person who needed it." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#fdf2ec" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%90%BC%3C/text%3E%3C/svg%3E" />
   <style>
-    :root { --peach: #fdf2ec; --rose: #d4776b; --ink: #2b2422; --mute: #6b5e5b; }
+    :root {
+      --peach: #fdf2ec;
+      --peach-deep: #f7e3d6;
+      --rose: #d4776b;
+      --rose-soft: #e8a48f;
+      --ink: #2b2422;
+      --mute: #6b5e5b;
+      --line: rgba(43, 36, 34, 0.08);
+    }
     * { box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif; max-width: 720px; margin: 0 auto; padding: 48px 24px 96px; background: var(--peach); color: var(--ink); line-height: 1.65; }
-    h1 { font-family: "SF Pro Display", -apple-system, serif; font-weight: 500; font-size: 40px; letter-spacing: -0.02em; margin: 0 0 8px; }
-    .tag { color: var(--rose); font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 48px; }
-    h2 { font-size: 22px; font-weight: 500; margin: 48px 0 12px; letter-spacing: -0.01em; }
-    p { font-size: 17px; color: var(--ink); margin: 0 0 16px; }
-    .muted { color: var(--mute); font-size: 15px; }
-    ul { padding-left: 20px; }
-    li { margin-bottom: 8px; }
-    code { background: rgba(212, 119, 107, 0.08); padding: 2px 6px; border-radius: 4px; font-size: 15px; }
-    hr { border: none; border-top: 1px solid rgba(43, 36, 34, 0.1); margin: 56px 0 32px; }
-    .lang { float: right; font-size: 14px; color: var(--mute); }
-    .lang a { color: var(--mute); text-decoration: none; margin-left: 12px; }
-    .lang a:hover { color: var(--rose); }
-    a { color: var(--rose); }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+      margin: 0;
+      background: var(--peach);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+    /* nav */
+    nav {
+      padding: 24px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+    }
+    .logo {
+      font-family: "SF Pro Display", serif;
+      font-size: 20px;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .logo::before { content: "🐱 "; }
+    .nav-links a {
+      color: var(--mute);
+      text-decoration: none;
+      font-size: 14px;
+      margin-left: 24px;
+    }
+    .nav-links a:hover { color: var(--rose); }
+
+    /* hero */
+    .hero {
+      padding: 96px 0 80px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-family: "SF Pro Display", -apple-system, serif;
+      font-size: clamp(40px, 6vw, 64px);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin: 0 0 24px;
+      font-weight: 500;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--rose);
+    }
+    .hero p.lede {
+      font-size: 20px;
+      color: var(--mute);
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+    .cta {
+      display: inline-block;
+      background: var(--ink);
+      color: var(--peach);
+      padding: 14px 28px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      transition: transform 0.15s, background 0.15s;
+    }
+    .cta:hover { background: var(--rose); transform: translateY(-1px); }
+    .cta-secondary {
+      display: inline-block;
+      color: var(--ink);
+      padding: 14px 24px;
+      text-decoration: none;
+      font-size: 15px;
+      margin-left: 12px;
+    }
+    .cta-secondary:hover { color: var(--rose); }
+    .founder-note {
+      max-width: 540px;
+      margin: 56px auto 0;
+      font-size: 15px;
+      color: var(--mute);
+      font-style: italic;
+    }
+    .founder-note::before { content: "— "; }
+
+    /* section */
+    section { padding: 80px 0; border-top: 1px solid var(--line); }
+    section h2 {
+      font-family: "SF Pro Display", serif;
+      font-size: 36px;
+      letter-spacing: -0.02em;
+      margin: 0 0 16px;
+      font-weight: 500;
+    }
+    section .sub {
+      font-size: 18px;
+      color: var(--mute);
+      max-width: 560px;
+      margin: 0 0 48px;
+    }
+
+    /* 7 scenarios */
+    .scenarios {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .scenario {
+      display: flex;
+      align-items: baseline;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .scenario:last-child { border-bottom: none; }
+    .scenario .emo { font-size: 28px; width: 56px; flex-shrink: 0; }
+    .scenario .text { flex: 1; }
+    .scenario .title { font-size: 19px; color: var(--ink); margin: 0 0 4px; }
+    .scenario .en { font-size: 15px; color: var(--mute); margin: 0; }
+
+    /* 3 depths */
+    .depths {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 640px) { .depths { grid-template-columns: 1fr; } }
+    .depth {
+      padding: 28px 24px;
+      background: white;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+    }
+    .depth .label {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 8px;
+    }
+    .depth .name { font-size: 22px; margin: 0 0 12px; font-weight: 500; }
+    .depth .desc { font-size: 15px; color: var(--mute); margin: 0; }
+
+    /* NOT list */
+    .not-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 640px) { .not-list { grid-template-columns: 1fr; } }
+    .not-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 16px;
+      color: var(--ink);
+    }
+    .not-item::before { content: "✕"; color: var(--rose); font-weight: bold; flex-shrink: 0; }
+
+    /* cat line */
+    .cat-quote {
+      background: var(--peach-deep);
+      padding: 64px 0;
+      text-align: center;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .cat-quote blockquote {
+      font-family: "SF Pro Display", serif;
+      font-size: clamp(28px, 4vw, 40px);
+      letter-spacing: -0.02em;
+      max-width: 680px;
+      margin: 0 auto;
+      line-height: 1.3;
+      color: var(--ink);
+    }
+    .cat-quote cite {
+      display: block;
+      font-style: normal;
+      font-size: 14px;
+      color: var(--mute);
+      margin-top: 24px;
+      letter-spacing: 0.04em;
+    }
+
+    /* sign off */
+    .signoff { padding: 80px 0; text-align: center; }
+    .signoff p { max-width: 540px; margin: 0 auto 16px; font-size: 17px; color: var(--mute); }
+    .signoff .name { color: var(--ink); font-weight: 500; margin-top: 32px; }
+
+    footer {
+      padding: 32px 0 48px;
+      border-top: 1px solid var(--line);
+      font-size: 13px;
+      color: var(--mute);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer a { color: var(--mute); text-decoration: none; margin-left: 16px; }
+    footer a:hover { color: var(--rose); }
+
+    @media (max-width: 640px) {
+      .hero { padding: 64px 0 56px; }
+      section { padding: 56px 0; }
+      .nav-links a { margin-left: 16px; }
+      footer { flex-direction: column; gap: 16px; }
+    }
   </style>
 </head>
 <body>
-  <div class="lang">
-    <a href="#en">EN</a>
-    <a href="#zh">繁體</a>
+  <div class="wrap">
+    <nav>
+      <a href="/" class="logo">heartstring</a>
+      <div class="nav-links">
+        <a href="#scenarios">scenarios</a>
+        <a href="#not">what it's not</a>
+        <a href="mailto:hello@heartstring.app">contact</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <h1>For the moment you <em>passed</em> IELTS<br>but still freeze after small talk.</h1>
+      <p class="lede">Heartstring is a place to practice saying the things you actually want to say in English. A cat listens. You don't get graded.</p>
+      <a href="#get" class="cta">Try it free</a>
+      <a href="#scenarios" class="cta-secondary">see what it is →</a>
+      <p class="founder-note">I built this because I'm one of those people. I'm going to UofT in September and I'm scared I won't make friends because I freeze. So I built the practice space I needed.</p>
+    </header>
   </div>
-  <div class="tag">Privacy</div>
-  <h1>What Heartstring knows about you.</h1>
-  <p class="muted">Last updated: June 19, 2026</p>
 
-  <p>This is a privacy policy for an app built by one person (Hi, I'm Hailey). I tried to write it the way I'd want to read it. No legal theater, no dark patterns. If something is unclear, email me: <a href="mailto:hello@heartstring.app">hello@heartstring.app</a>.</p>
+  <section id="scenarios">
+    <div class="wrap">
+      <h2>7 situations you'll actually face.</h2>
+      <p class="sub">Not textbook scenes. The ones where real English is required and you have nothing scripted.</p>
+      <div class="scenarios">
+        <div class="scenario">
+          <div class="emo">🌙</div>
+          <div class="text">
+            <p class="title">Lonely at 3 AM</p>
+            <p class="en">When you can't sleep and the room is too quiet.</p>
+          </div>
+        </div>
+        <div class="scenario">
+          <div class="emo">🏠</div>
+          <div class="text">
+            <p class="title">When you miss home</p>
+            <p class="en">And "I miss home" doesn't feel like enough.</p>
+          </div>
+        </div>
+        <div class="scenario">
+          <div class="emo">🎭</div>
+          <div class="text">
+            <p class="title">A day of fake smiles</p>
+            <p class="en">When you said "I'm fine" 14 times and meant it 0.</p>
+          </div>
+        </div>
+        <div class="scenario">
+          <div class="emo">💔</div>
+          <div class="text">
+            <p class="title">The sorry you can't say</p>
+            <p class="en">To someone who isn't here anymore. Or is, but you still can't.</p>
+          </div>
+        </div>
+        <div class="scenario">
+          <div class="emo">🪞</div>
+          <div class="text">
+            <p class="title">Who am I, where do I belong?</p>
+            <p class="en">When two homes don't fit and you're floating between.</p>
+          </div>
+        </div>
+        <div class="scenario">
+          <div class="emo">🏆</div>
+          <div class="text">
+            <p class="title">An achievement no one knows about</p>
+            <p class="en">The thing you did that you can't tell anyone.</p>
+          </div>
+        </div>
+        <div class="scenario">
+          <div class="emo">🌍</div>
+          <div class="text">
+            <p class="title">Always "the foreigner"</p>
+            <p class="en">The exhaustion of being read first, person second.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <h2>The short version</h2>
-  <ul>
-    <li>Your conversations stay on your phone by default.</li>
-    <li>If you sign in, your progress syncs to a server so you don't lose it.</li>
-    <li>I don't sell your data. I don't show you ads. I don't track you across apps.</li>
-    <li>The microphone is only used when you tap record. It's not always on.</li>
-    <li>You can delete everything anytime. I'll show you how below.</li>
-  </ul>
+  <section>
+    <div class="wrap">
+      <h2>3 depths. You pick.</h2>
+      <p class="sub">Some days you want to stay on the surface. Some days you want to go where you don't usually go.</p>
+      <div class="depths">
+        <div class="depth">
+          <div class="label">Depth 01</div>
+          <h3 class="name">Light</h3>
+          <p class="desc">Surface level. Just for warmup. "How was your day" stuff.</p>
+        </div>
+        <div class="depth">
+          <div class="label">Depth 02</div>
+          <h3 class="name">Medium</h3>
+          <p class="desc">Start being real. "What actually bothered you" stuff.</p>
+        </div>
+        <div class="depth">
+          <div class="label">Depth 03</div>
+          <h3 class="name">Deep</h3>
+          <p class="desc">Go where you don't usually go. The cat can take it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <h2 id="en">In English</h2>
+  <div class="cat-quote">
+    <div class="wrap">
+      <blockquote>"I'm here."</blockquote>
+      <cite>— the cat, every time you open the app</cite>
+    </div>
+  </div>
 
-  <h2>1. What Heartstring is</h2>
-  <p>Heartstring is an iOS and Android app for practicing saying what you actually mean in English. You talk to a cat companion. The app remembers what you shared so you can see your growth over time. After each conversation, the app may suggest a small real-world challenge (like "try telling one friend you missed home this week").</p>
+  <section id="not">
+    <div class="wrap">
+      <h2>What Heartstring is not.</h2>
+      <p class="sub">Because there's a lot of apps that are. This one isn't.</p>
+      <div class="not-list">
+        <div class="not-item">A grammar app</div>
+        <div class="not-item">A pronunciation corrector</div>
+        <div class="not-item">An IELTS tutor</div>
+        <div class="not-item">A Duolingo replacement</div>
+        <div class="not-item">Daily streaks with guilt</div>
+        <div class="not-item">Coin loops or gamification traps</div>
+        <div class="not-item">Notifications that say "I miss you"</div>
+        <div class="not-item">An AI trying to be your therapist</div>
+      </div>
+    </div>
+  </section>
 
-  <h2>2. What data I collect</h2>
-  <p><strong>Conversations you have in the app.</strong> Stored locally on your device. If you create an account, synced to my server (Cloudflare) so you can restore on a new device.</p>
-  <p><strong>Your account email (optional).</strong> Only if you sign in. Used for password reset and Pro subscription. Never shared with anyone.</p>
-  <p><strong>Subscription status.</strong> Stored by Apple/Google when you buy Heartstring Pro. I only see whether you have Pro or not. I never see your credit card.</p>
-  <p><strong>Crash reports (anonymous).</strong> I use Sentry to know if the app crashed. Reports include the error and your device model, not your name or conversations.</p>
+  <section id="get">
+    <div class="wrap">
+      <h2>Try it.</h2>
+      <p class="sub">Free. 30 friends are testing it right now. If you're one of them, check the link I sent you. If you want to be — email me.</p>
+      <p style="text-align: center; margin-top: 32px;">
+        <a href="mailto:hello@heartstring.app?subject=Heartstring%20beta" class="cta">Ask for early access</a>
+      </p>
+    </div>
+  </section>
 
-  <h2>3. What I do NOT collect</h2>
-  <ul>
-    <li>I don't track you across other apps or websites.</li>
-    <li>I don't sell or rent your data, ever.</li>
-    <li>I don't run ads inside Heartstring.</li>
-    <li>I don't read your conversations to train AI models.</li>
-    <li>I don't use third-party analytics that identify you (no Facebook SDK, no Google Analytics for Firebase).</li>
-  </ul>
+  <section class="signoff">
+    <div class="wrap">
+      <p>If you've ever passed an English test and still felt like you couldn't speak — this is for you.</p>
+      <p>The app will not be louder than it needs to be. The cat will never say "I worry about you." The cat will say "I'm here."</p>
+      <p>— Hailey</p>
+      <p class="name">builder of Heartstring, future UofT student, fellow freezer</p>
+    </div>
+  </section>
 
-  <h2>4. Microphone and speech recognition</h2>
-  <p>Heartstring only uses the microphone when you tap the record button. Audio is processed on your device to convert speech to text, then the audio is discarded. The transcribed text is what gets stored, not the audio itself.</p>
-  <p>If your device uses Apple's speech recognition, Apple may receive the audio for transcription. Apple's privacy policy covers that: <a href="https://www.apple.com/legal/privacy/">apple.com/legal/privacy</a>.</p>
-
-  <h2>5. Where your data lives</h2>
-  <ul>
-    <li><strong>On your device</strong> (always): conversations, your pet's name, your customizations, your progress.</li>
-    <li><strong>On my server</strong> (only if you sign in): a copy of the above, encrypted in transit and at rest. Server hosted on Cloudflare. Located in the US.</li>
-  </ul>
-
-  <h2>6. Who can see your data</h2>
-  <p>Only me (Hailey). I don't have employees. I don't share access with contractors. If I ever need to bring someone in to help, I'll update this page first.</p>
-  <p><strong>Legal requests:</strong> If a government asks for your data, I'll tell you unless legally prohibited. I have not received any such requests to date.</p>
-
-  <h2>7. How long I keep your data</h2>
-  <ul>
-    <li><strong>If you don't sign in:</strong> Everything stays on your device. When you delete the app, it's gone.</li>
-    <li><strong>If you sign in:</strong> Your data stays on the server until you delete your account. After deletion, it's removed from backups within 30 days.</li>
-  </ul>
-
-  <h2>8. Your rights</h2>
-  <ul>
-    <li><strong>Export:</strong> You can see everything in the app. (Settings → Export my data.)</li>
-    <li><strong>Delete:</strong> Settings → Delete account. Or uninstall the app if you didn't sign in.</li>
-    <li><strong>Correct:</strong> You can edit your memories inside the app.</li>
-    <li><strong>Stop syncing:</strong> Settings → Sign out. Your data stays local only.</li>
-  </ul>
-
-  <h2>9. Children's privacy</h2>
-  <p>Heartstring is not for children under 13. I don't knowingly collect data from children under 13. If you believe a child under 13 has signed up, email me and I'll delete the account within 7 days.</p>
-
-  <h2>10. Changes to this policy</h2>
-  <p>If I change something material, I'll show you a notification in the app before it takes effect. The "Last updated" date at the top tells you when.</p>
-
-  <h2>11. Contact</h2>
-  <p>Hailey Lai — <a href="mailto:hello@heartstring.app">hello@heartstring.app</a></p>
-
-  <hr />
-
-  <h2 id="zh">繁體中文</h2>
-
-  <h2>1. Heartstring 係咩</h2>
-  <p>Heartstring 係一個 iOS / Android app, 俾你練習用英文講出你真正想講嘅嘢。你同一隻貓傾偈。app 會記住你講過嘅嘢, 等你可以睇到自己嘅成長。每次傾完偈, app 可能會建議一個小挑戰(例如「呢個禮拜同你一個朋友講你掛住屋企」)。</p>
-
-  <h2>2. 我收集咩 data</h2>
-  <p><strong>你喺 app 入面嘅對話。</strong>儲存喺你部機。如果開咗 account, 會同步去我嘅 server(Cloudflare), 等你換機可以 restore。</p>
-  <p><strong>你嘅 email(非必要)。</strong>只係 sign in 嘅時候先用。用嚟 reset password 同 Pro 訂閱。永遠唔會 share 俾其他人。</p>
-  <p><strong>訂閱狀態。</strong>由 Apple / Google store。淨係睇到你係唔係 Pro。永遠睇唔到你張卡。</p>
-  <p><strong>Crash report(匿名)。</strong>我用 Sentry 嚟知道 app 有冇 crash。Report 包含 error 同你部機型號, 唔包含你個名或者對話。</p>
-
-  <h2>3. 我唔收集咩</h2>
-  <ul>
-    <li>我唔會 cross-app / cross-website 追蹤你。</li>
-    <li>我永遠唔會賣或者租你嘅 data。</li>
-    <li>Heartstring 入面冇廣告。</li>
-    <li>我唔會用你嘅對話嚟訓練 AI。</li>
-    <li>我唔用識別到你身份嘅第三方 analytics(冇 Facebook SDK, 冇 Google Analytics)。</li>
-  </ul>
-
-  <h2>4. 咪高風同語音識別</h2>
-  <p>Heartstring 只係你撳 record 掣嘅時候先用咪高風。Audio 喺你部機轉成文字, 之後就掉咗。淨係儲文字, 唔儲 audio。</p>
-  <p>如果你用 Apple 嘅 speech recognition, Apple 可能會收到 audio 去做 transcription。Apple 嘅 privacy policy 喺: <a href="https://www.apple.com/legal/privacy/">apple.com/legal/privacy</a>。</p>
-
-  <h2>5. 你嘅 data 去咗邊</h2>
-  <ul>
-    <li><strong>喺你部機</strong>(永遠): 對話、你隻貓個名、自訂設定、進度。</li>
-    <li><strong>喺我 server</strong>(只係 sign in 嘅時候): 以上嘅一份 copy, transit 同 storage 加密。Server host 喺 Cloudflare, 美國。</li>
-  </ul>
-
-  <h2>6. 邊個睇到</h2>
-  <p>淨係我(Hailey)。我冇員工。我唔會 share access 俾承辦商。如果我有需要請人幫手, 會先更新呢一頁。</p>
-  <p><strong>法律要求:</strong> 如果政府問我攞你嘅 data, 我會話你知(除非法律禁)。到而家我未收過類似要求。</p>
-
-  <h2>7. 我 keep 你 data 幾耐</h2>
-  <ul>
-    <li><strong>如果無 sign in:</strong> 所有嘢留喺你部機。刪 app 嘅時候就冇晒。</li>
-    <li><strong>如果 sign in 咗:</strong> Data 留喺 server 直到你刪 account。刪咗之後 30 日內由 backup 清走。</li>
-  </ul>
-
-  <h2>8. 你嘅權利</h2>
-  <ul>
-    <li><strong>匯出:</strong> app 入面可以睇晒所有嘢。(Settings → Export my data。)</li>
-    <li><strong>刪除:</strong> Settings → Delete account。如果無 sign in, 直接 uninstall。</li>
-    <li><strong>修改:</strong> 你可以喺 app 入面改你嘅 memories。</li>
-    <li><strong>停咗 sync:</strong> Settings → Sign out。Data 留喺 local。</li>
-  </ul>
-
-  <h2>9. 小朋友私隱</h2>
-  <p>Heartstring 唔係俾 13 歲以下用。我唔會刻意 collect 13 歲以下嘅 data。如果你發現有 13 歲以下 sign up, email 我, 7 日內我會刪 account。</p>
-
-  <h2>10. 政策改動</h2>
-  <p>如果我改重要嘢, 會喺 app 入面通知你, 喺生效之前。頂部嘅「Last updated」日期就係幾時改。</p>
-
-  <h2>11. 聯絡</h2>
-  <p>Hailey Lai — <a href="mailto:hello@heartstring.app">hello@heartstring.app</a></p>
+  <footer class="wrap">
+    <div>© 2026 Hailey Lai</div>
+    <div>
+      <a href="./privacy.html">privacy</a>
+      <a href="mailto:hello@heartstring.app">contact</a>
+    </div>
+  </footer>
 </body>
 </html>
