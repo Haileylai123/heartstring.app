@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Send feedback — Heartstring</title>
+  <meta name="description" content="5 questions for the 30 friends testing Heartstring. Takes 2 minutes." />
+  <meta name="theme-color" content="#fdf2ec" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%90%BC%3C/text%3E%3C/svg%3E" />
+  <style>
+    :root { --peach: #fdf2ec; --peach-deep: #f7e3d6; --rose: #d4776b; --rose-soft: #e8a48f; --ink: #2b2422; --mute: #6b5e5b; --line: rgba(43, 36, 34, 0.08); --good: #8aa487; }
+    * { box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif; background: var(--peach); color: var(--ink); margin: 0; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    .wrap { max-width: 640px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 24px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); }
+    .logo { font-family: "SF Pro Display", serif; font-size: 20px; letter-spacing: -0.01em; color: var(--ink); text-decoration: none; font-weight: 500; }
+    .logo::before { content: "🐱 "; }
+    .nav-links a { color: var(--mute); text-decoration: none; font-size: 14px; margin-left: 24px; }
+    .nav-links a:hover { color: var(--rose); }
+
+    header { padding: 72px 0 48px; text-align: center; }
+    header h1 { font-family: "SF Pro Display", serif; font-size: clamp(32px, 5vw, 44px); letter-spacing: -0.02em; line-height: 1.2; margin: 0 0 16px; font-weight: 500; }
+    header p { font-size: 18px; color: var(--mute); max-width: 480px; margin: 0 auto; }
+    header .time { font-size: 14px; color: var(--mute); margin-top: 16px; }
+
+    /* form */
+    form { background: white; border: 1px solid var(--line); border-radius: 20px; padding: 40px 32px; margin: 24px 0 48px; }
+    @media (max-width: 640px) { form { padding: 28px 20px; } }
+
+    .question { margin-bottom: 36px; }
+    .question:last-of-type { margin-bottom: 16px; }
+    .question .q-label { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rose); margin-bottom: 6px; }
+    .question .q-text { font-family: "SF Pro Display", serif; font-size: 20px; margin: 0 0 6px; letter-spacing: -0.01em; font-weight: 500; }
+    .question .q-help { font-size: 14px; color: var(--mute); margin: 0 0 16px; }
+
+    /* radio / checkbox */
+    .options { display: flex; flex-direction: column; gap: 8px; }
+    .opt { display: flex; align-items: center; padding: 14px 16px; border: 1.5px solid var(--line); border-radius: 12px; cursor: pointer; transition: all 0.15s; }
+    .opt:hover { border-color: var(--rose-soft); background: var(--peach); }
+    .opt input { margin-right: 12px; accent-color: var(--rose); }
+    .opt span { font-size: 15px; }
+    .opt input:checked + span { font-weight: 500; }
+    .opt:has(input:checked) { border-color: var(--rose); background: var(--peach); }
+
+    /* text */
+    textarea, input[type="text"], input[type="email"] {
+      width: 100%; padding: 14px 16px; border: 1.5px solid var(--line); border-radius: 12px;
+      font-family: inherit; font-size: 15px; background: white; color: var(--ink);
+      transition: border-color 0.15s; resize: vertical;
+    }
+    textarea:focus, input:focus { outline: none; border-color: var(--rose); }
+    textarea { min-height: 96px; }
+    .lang-toggle { font-size: 13px; color: var(--mute); margin-bottom: 4px; text-align: right; }
+    .lang-toggle button { background: none; border: none; color: var(--mute); cursor: pointer; padding: 4px 8px; font-family: inherit; font-size: 13px; }
+    .lang-toggle button.active { color: var(--rose); font-weight: 500; }
+
+    /* bilingual section */
+    .bilingual { display: none; }
+    .bilingual.show { display: block; }
+    .bilingual .alt { color: var(--mute); font-size: 14px; margin-top: 4px; }
+
+    /* submit */
+    button.submit {
+      width: 100%; padding: 16px; background: var(--ink); color: var(--peach);
+      border: none; border-radius: 999px; font-size: 16px; font-weight: 500;
+      cursor: pointer; margin-top: 16px; font-family: inherit;
+      transition: background 0.15s, transform 0.15s;
+    }
+    button.submit:hover { background: var(--rose); transform: translateY(-1px); }
+    button.submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    .privacy-note { font-size: 13px; color: var(--mute); text-align: center; margin-top: 20px; }
+    .privacy-note a { color: var(--mute); text-decoration: underline; }
+
+    /* success state */
+    .success { display: none; text-align: center; padding: 48px 24px; }
+    .success.show { display: block; }
+    .success .icon { font-size: 48px; margin-bottom: 16px; }
+    .success h2 { font-family: "SF Pro Display", serif; font-size: 28px; margin: 0 0 12px; font-weight: 500; }
+    .success p { color: var(--mute); }
+
+    footer { padding: 32px 0 48px; border-top: 1px solid var(--line); font-size: 13px; color: var(--mute); display: flex; justify-content: space-between; }
+    footer a { color: var(--mute); text-decoration: none; margin-left: 16px; }
+    footer a:hover { color: var(--rose); }
+
+    .sep { text-align: center; margin: 32px 0; color: var(--mute); font-size: 13px; letter-spacing: 0.05em; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav>
+      <a href="./index.html" class="logo">heartstring</a>
+      <div class="nav-links">
+        <a href="./index.html">home</a>
+        <a href="mailto:hello@heartstring.app">contact</a>
+      </div>
+    </nav>
+
+    <header>
+      <h1>Send your feedback.</h1>
+      <p>5 questions. About 2 minutes. I read every single one.</p>
+      <p class="time">— Hailey</p>
+    </header>
+
+    <form id="feedbackForm">
+      <div class="lang-toggle">
+        <button type="button" data-lang="en" class="active">English</button>
+        <button type="button" data-lang="zh">繁體中文</button>
+      </div>
+
+      <!-- Q1 -->
+      <div class="question">
+        <div class="q-label lang-en">Question 1 of 5</div>
+        <div class="q-label lang-zh" style="display:none">問題 1 / 5</div>
+        <h2 class="q-text lang-en">Did it feel real?</h2>
+        <h2 class="q-text lang-zh" style="display:none">有冇覺得真?</h2>
+        <p class="q-help lang-en">Not "useful." Not "well-designed." Real.</p>
+        <p class="q-help lang-zh" style="display:none">唔係「有用」。唔係「設計好」。係「真」。</p>
+        <div class="options">
+          <label class="opt"><input type="radio" name="q1" value="yes" required /><span class="lang-en">Yes — I forgot it was an app for a minute</span><span class="lang-zh" style="display:none">有 — 我有一下唔記得佢係個 app</span></label>
+          <label class="opt"><input type="radio" name="q1" value="kinda" /><span class="lang-en">Kinda — some parts, not all</span><span class="lang-zh" style="display:none">有少少 — 某啲部分</span></label>
+          <label class="opt"><input type="radio" name="q1" value="no" /><span class="lang-en">No — felt like a chatbot with extra steps</span><span class="lang-zh" style="display:none">冇 — 似 chatbot 多咗幾個步驟</span></label>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="question">
+        <div class="q-label lang-en">Question 2 of 5</div>
+        <div class="q-label lang-zh" style="display:none">問題 2 / 5</div>
+        <h2 class="q-text lang-en">Did you actually type something you wouldn't normally say out loud?</h2>
+        <h2 class="q-text lang-zh" style="display:none">你有冇打咗啲平時唔會講出口嘅嘢?</h2>
+        <p class="q-help lang-en">This is the whole point. Be honest with me.</p>
+        <p class="q-help lang-zh" style="display:none">呢個係成個 app 嘅目的。同我講真話。</p>
+        <div class="options">
+          <label class="opt"><input type="radio" name="q2" value="yes" required /><span class="lang-en">Yes — and it felt weird but good</span><span class="lang-zh" style="display:none">有 — 覺得怪但係好</span></label>
+          <label class="opt"><input type="radio" name="q2" value="not-sure" /><span class="lang-en">Not sure — maybe, hard to tell</span><span class="lang-zh" style="display:none">唔確定 — 可能</span></label>
+          <label class="opt"><input type="radio" name="q2" value="no" /><span class="lang-en">No — I kept it safe</span><span class="lang-zh" style="display:none">冇 — 我 keep 住安全嘅嘢講</span></label>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="question">
+        <div class="q-label lang-en">Question 3 of 5</div>
+        <div class="q-label lang-zh" style="display:none">問題 3 / 5</div>
+        <h2 class="q-text lang-en">What's the one thing that bugged you?</h2>
+        <h2 class="q-text lang-zh" style="display:none">有一樣嘢最 bug 你 — 係咩?</h2>
+        <p class="q-help lang-en">UI, tone, the cat, the scenarios, anything. One is enough.</p>
+        <p class="q-help lang-zh" style="display:none">UI、tone、隻貓、情境,任何嘢。寫一樣就夠。</p>
+        <textarea name="q3" placeholder="e.g. The cat said 'I miss you' once and it felt wrong." required></textarea>
+      </div>
+
+      <!-- Q4 -->
+      <div class="question">
+        <div class="q-label lang-en">Question 4 of 5</div>
+        <div class="q-label lang-zh" style="display:none">問題 4 / 5</div>
+        <h2 class="q-text lang-en">Would you use it again?</h2>
+        <h2 class="q-text lang-zh" style="display:none">你會再用?</h2>
+        <div class="options">
+          <label class="opt"><input type="radio" name="q4" value="yes" required /><span class="lang-en">Yes — I'd open it on my own</span><span class="lang-zh" style="display:none">會 — 我會自己打開</span></label>
+          <label class="opt"><input type="radio" name="q4" value="maybe" /><span class="lang-en">Maybe — depends on the day</span><span class="lang-zh" style="display:none">可能 — 睇日子</span></label>
+          <label class="opt"><input type="radio" name="q4" value="no" /><span class="lang-en">No — wouldn't reach for it</span><span class="lang-zh" style="display:none">唔會 — 唔會主動開</span></label>
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="question">
+        <div class="q-label lang-en">Question 5 of 5</div>
+        <div class="q-label lang-zh" style="display:none">問題 5 / 5</div>
+        <h2 class="q-text lang-en">Anything missing that you'd want?</h2>
+        <h2 class="q-text lang-zh" style="display:none">有冇咩嘢你想有但冇?</h2>
+        <p class="q-help lang-en">A feature, a feeling, a scenario. One line is fine.</p>
+        <p class="q-help lang-zh" style="display:none">一個功能、一種感覺、一個情境。一句就夠。</p>
+        <textarea name="q5" placeholder="e.g. A way to record voice instead of typing."></textarea>
+      </div>
+
+      <div class="sep lang-en">— so I can reply —</div>
+      <div class="sep lang-zh" style="display:none">— 我要回信俾你 —</div>
+
+      <div class="question">
+        <div class="q-label lang-en">Your name (optional)</div>
+        <div class="q-label lang-zh" style="display:none">你個名(非必要)</div>
+        <input type="text" name="name" placeholder="Hailey" />
+      </div>
+
+      <div class="question">
+        <div class="q-label lang-en">Your email (optional, only if you want me to reply)</div>
+        <div class="q-label lang-zh" style="display:none">Email(非必要,只係你想我覆你先填)</div>
+        <input type="email" name="email" placeholder="you@example.com" />
+      </div>
+
+      <button type="submit" class="submit lang-en">Send feedback</button>
+      <button type="submit" class="submit lang-zh" style="display:none">傳送</button>
+
+      <p class="privacy-note lang-en">Stored on Google Sheets, only Hailey sees it. <a href="./privacy.html">privacy policy</a></p>
+      <p class="privacy-note lang-zh" style="display:none">儲喺 Google Sheets,只有 Hailey 睇到。<a href="./privacy.html">私隱政策</a></p>
+    </form>
+
+    <div class="success" id="success">
+      <div class="icon">🩷</div>
+      <h2 class="lang-en">Got it. Thank you.</h2>
+      <h2 class="lang-zh" style="display:none">收到。謝謝你。</h2>
+      <p class="lang-en">I'll read this carefully. If you left an email, I'll write back.</p>
+      <p class="lang-zh" style="display:none">我會慢慢讀。如果有留 email,我會覆你。</p>
+      <p style="margin-top: 24px;"><a href="./index.html" class="lang-en" style="color: var(--rose)">← back to home</a><a href="./index.html" class="lang-zh" style="display:none; color: var(--rose)">← 返主頁</a></p>
+    </div>
+
+    <footer class="wrap">
+      <div>© 2026 Hailey Lai</div>
+      <div>
+        <a href="./index.html">home</a>
+        <a href="./privacy.html">privacy</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Language toggle
+    document.querySelectorAll('.lang-toggle button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.dataset.lang;
+        document.querySelectorAll('.lang-toggle button').forEach(b => b.classList.toggle('active', b === btn));
+        document.querySelectorAll('.lang-en, .lang-zh').forEach(el => {
+          if (el.classList.contains('lang-' + lang)) el.style.display = '';
+          else el.style.display = 'none';
+        });
+        document.body.dataset.lang = lang;
+      });
+    });
+
+    // Form submission → Formspree (free tier) or your own endpoint
+    // To use Formspree: 1) sign up at formspree.io 2) replace YOUR_FORM_ID below 3) form will email you
+    // Alternative: Google Forms — but that requires more setup; Formspree is 5 minutes.
+    const form = document.getElementById('feedbackForm');
+    const success = document.getElementById('success');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = form.querySelector('button.submit:not([style*="display: none"])');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      const data = new FormData(form);
+      const payload = {};
+      data.forEach((v, k) => payload[k] = v);
+      payload.lang = document.body.dataset.lang || 'en';
+      payload.submittedAt = new Date().toISOString();
+
+      try {
+        // OPTION A: Formspree (recommended, 5-min setup)
+        // Sign up at formspree.io, create form, replace YOUR_FORM_ID
+        const r = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+          method: 'POST',
+          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (r.ok) {
+          form.style.display = 'none';
+          success.classList.add('show');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          throw new Error('Formspree returned ' + r.status);
+        }
+      } catch (err) {
+        // OPTION B: Fallback — open mailto with the data
+        const subject = encodeURIComponent('Heartstring feedback from ' + (payload.name || 'anonymous'));
+        const body = encodeURIComponent(
+          'Q1 (real?): ' + payload.q1 + '\n' +
+          'Q2 (said something real?): ' + payload.q2 + '\n' +
+          'Q3 (what bugged you): ' + payload.q3 + '\n' +
+          'Q4 (use again?): ' + payload.q4 + '\n' +
+          'Q5 (what\'s missing): ' + payload.q5 + '\n\n' +
+          'Name: ' + (payload.name || '-') + '\n' +
+          'Email: ' + (payload.email || '-') + '\n' +
+          'Lang: ' + payload.lang + '\n'
+        );
+        window.location.href = 'mailto:hello@heartstring.app?subject=' + subject + '&body=' + body;
+      }
+    });
+  </script>
+</body>
+</html>
