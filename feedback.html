@@ -227,9 +227,9 @@
       });
     });
 
-    // Form submission → Formspree (free tier) or your own endpoint
-    // To use Formspree: 1) sign up at formspree.io 2) replace YOUR_FORM_ID below 3) form will email you
-    // Alternative: Google Forms — but that requires more setup; Formspree is 5 minutes.
+    // Form submission → opens mailto: with pre-filled body (works on iOS, Android, desktop).
+    // Why not Formspree / Google Forms: zero-setup, friend just taps send in their mail app.
+    // Trade-off: friend has to have mail configured (every iPhone does).
     const form = document.getElementById('feedbackForm');
     const success = document.getElementById('success');
 
@@ -237,45 +237,36 @@
       e.preventDefault();
       const submitBtn = form.querySelector('button.submit:not([style*="display: none"])');
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending…';
 
       const data = new FormData(form);
       const payload = {};
       data.forEach((v, k) => payload[k] = v);
       payload.lang = document.body.dataset.lang || 'en';
-      payload.submittedAt = new Date().toISOString();
 
-      try {
-        // OPTION A: Formspree (recommended, 5-min setup)
-        // Sign up at formspree.io, create form, replace YOUR_FORM_ID
-        const r = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-          method: 'POST',
-          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
+      const subject = 'Heartstring feedback from ' + (payload.name || 'anonymous');
+      const body =
+        'Q1 (felt real?): ' + (payload.q1 || '-') + '\n' +
+        'Q2 (said something real?): ' + (payload.q2 || '-') + '\n' +
+        'Q3 (what bugged you): ' + (payload.q3 || '-') + '\n' +
+        'Q4 (use again?): ' + (payload.q4 || '-') + '\n' +
+        'Q5 (what is missing): ' + (payload.q5 || '-') + '\n\n' +
+        'Name: ' + (payload.name || '-') + '\n' +
+        'Reply-to: ' + (payload.email || '-') + '\n' +
+        'Language: ' + payload.lang + '\n';
 
-        if (r.ok) {
-          form.style.display = 'none';
-          success.classList.add('show');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else {
-          throw new Error('Formspree returned ' + r.status);
-        }
-      } catch (err) {
-        // OPTION B: Fallback — open mailto with the data
-        const subject = encodeURIComponent('Heartstring feedback from ' + (payload.name || 'anonymous'));
-        const body = encodeURIComponent(
-          'Q1 (real?): ' + payload.q1 + '\n' +
-          'Q2 (said something real?): ' + payload.q2 + '\n' +
-          'Q3 (what bugged you): ' + payload.q3 + '\n' +
-          'Q4 (use again?): ' + payload.q4 + '\n' +
-          'Q5 (what\'s missing): ' + payload.q5 + '\n\n' +
-          'Name: ' + (payload.name || '-') + '\n' +
-          'Email: ' + (payload.email || '-') + '\n' +
-          'Lang: ' + payload.lang + '\n'
-        );
-        window.location.href = 'mailto:hello@heartstring.app?subject=' + subject + '&body=' + body;
-      }
+      // Open mail app with pre-filled body
+      window.location.href =
+        'mailto:hello@heartstring.app'
+        + '?subject=' + encodeURIComponent(subject)
+        + '&body=' + encodeURIComponent(body);
+
+      // Show success after a beat (mailto: opens mail app, the form is "done" from the page's POV)
+      setTimeout(() => {
+        form.style.display = 'none';
+        success.classList.add('show');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        submitBtn.disabled = false;
+      }, 800);
     });
   </script>
 </body>
